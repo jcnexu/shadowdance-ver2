@@ -1,7 +1,7 @@
 import bagel.*;
 
 public class Note {
-    private final Image noteImage;
+    protected Image noteImage;
     private final int appearanceFrame;
     private final int NOTE_SPEED = 2;
     // y-coordinate of image of stationary note at end of the lanes
@@ -13,7 +13,6 @@ public class Note {
     private String noteLane;
 
     public Note(String dir, int startX, int appearanceFrame) {
-        noteImage = new Image("res/note" + dir + ".png");
         this.startX = startX;
         this.appearanceFrame = appearanceFrame;
         this.noteLane = dir;

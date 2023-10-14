@@ -79,7 +79,8 @@ public class ShadowDance extends AbstractGame  {
             }
         } else if (finished) {
             // Target has been met!
-            /* if(targetMet) {
+            started = false;
+            if(targetMet) {
                 defaultFont.drawString(CLEAR_MESSAGE, (WINDOW_WIDTH/2 - defaultFont.getWidth(CLEAR_MESSAGE)),
                         300);
                 startFont.drawString(END_INSTRUCTIONS, (WINDOW_WIDTH/2 - defaultFont.getWidth(CLEAR_MESSAGE)),
@@ -93,11 +94,10 @@ public class ShadowDance extends AbstractGame  {
             }
 
             // Will probably need to fix this bit up -> not sure where it goes for now
-            started = false;
 
             if(input.wasPressed(Keys.SPACE)) {
                 started = true;
-            } */
+            }
 
         } else {
             // Game has started!
@@ -106,10 +106,10 @@ public class ShadowDance extends AbstractGame  {
                 currFrame++;
                 level1.update(input, accuracy);
 
-                /* finished = level1.getLevelFinished();
+                finished = level1.getLevelFinished();
                 if(finished) {
                     targetMet = checkTargetMet(level1, L1_TARGET);
-                }*/
+                }
             }
             if(pressedKeyNum.equals("2")) {
                 // Level 2 has been chosen

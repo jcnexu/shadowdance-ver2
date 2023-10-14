@@ -75,8 +75,6 @@ public class Lane {
 
         for(int i = currNote; i < laneNotes.size(); i++) {
             laneNotes.get(i).noteDraw();
-            System.out.println("index note:" + i + " noteType:" + laneNotes.get(i).getStartX()
-                    + " noteLane: " + laneNotes.get(i).getNoteLane());
         }
     }
 
