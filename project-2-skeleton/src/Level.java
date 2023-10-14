@@ -9,13 +9,11 @@ public class Level {
     private final Font scoreFont = new Font("res/FSO8BITR.TTF", 30);
     private final static int SCORE_X = 35;
     private final static int SCORE_Y = 35;
-    private final static int L1_TARGET = 150;
-    private final static int L2_TARGET = 400;
-    private final static int L3_TARGET = 350;
     private ArrayList<Lane> lanesArray = new ArrayList<Lane>();
     private int numLanes = 0;
     private int levelScore = 0;
     private Accuracy accuracy = new Accuracy();
+    private boolean levelFinished = false;
 
     public Level(int levelNum) {
         readCSV(levelNum);
@@ -32,6 +30,10 @@ public class Level {
 
     public int getLevelScore() {
         return this.levelScore;
+    }
+
+    public boolean getLevelFinished() {
+        return this.levelFinished;
     }
 
     public void setLevelScore(int newScore) {
@@ -52,9 +54,35 @@ public class Level {
                     lanesArray.add(currLane);
                 }
                 // Otherwise, for the notes
+                int noteFrameNumber = Integer.parseInt(fields[2]);
+                createNote(fields[0], fields[1], noteFrameNumber, lanesArray);
             }
         } catch(IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void createNote(String laneType, String noteType, int frameNumber, ArrayList<Lane> lanesArray) {
+        int startX;
+        Note currNote;
+        if(noteType.equalsIgnoreCase("Normal")) {
+           for(int i = 0; i < lanesArray.size(); i++) {
+               if(lanesArray.get(i).getLaneType().equals(laneType)) {
+                   startX = lanesArray.get(i).getLaneX();
+                   currNote = new NormalNote(laneType, startX, frameNumber);
+                   lanesArray.get(i).addNote(currNote);
+                   break;
+               }
+           }
+        } else if(noteType.equalsIgnoreCase("Hold")) {
+            for(int i = 0; i < lanesArray.size(); i++) {
+                if(lanesArray.get(i).getLaneType().equals(laneType)) {
+                    startX = lanesArray.get(i).getLaneX();
+                    currNote = new HoldNote(laneType, startX, frameNumber);
+                    lanesArray.get(i).addNote(currNote);
+                    break;
+                }
+            }
         }
     }
 
@@ -68,12 +96,13 @@ public class Level {
         }
 
         accuracy.update();
+        levelFinished = checkFinished();
 
     }
 
     public void levelDraw() {
         for(int i = 0; i < lanesArray.size(); i++) {
-            lanesArray.get(i).draw();
+            lanesArray.get(i).laneDraw();
         }
     }
 

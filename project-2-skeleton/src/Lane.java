@@ -8,7 +8,7 @@ public class Lane {
     private int centreY;
     private String laneType;
     private final Image laneImage;
-    private ArrayList<Note> laneNotes = new ArrayList<>();
+    private ArrayList<Note> laneNotes = new ArrayList<Note>();
     private int currNote = 0;
     protected Keys relevantKey;
 
@@ -37,9 +37,17 @@ public class Lane {
         return laneType;
     }
 
+    public ArrayList<Note> getNoteArray() {
+        return this.laneNotes;
+    }
+
+    public int getLaneX() {
+        return this.centreX;
+    }
+
     // Adapted from Project 1's solution's update() function in Lane class
     public int update(Input input, Accuracy accuracy) {
-        draw();
+        laneDraw();
         int i;
 
         for(i = 0; i < laneNotes.size(); i++) {
@@ -47,8 +55,8 @@ public class Lane {
         }
 
         if(currNote < laneNotes.size()) {
-            int score = laneNotes.get(i).checkScore(input, accuracy, TARGET_HEIGHT, relevantKey);
-            if(laneNotes.get(i).isCompleted()) {
+            int score = laneNotes.get(currNote).checkScore(input, accuracy, TARGET_HEIGHT, relevantKey);
+            if(laneNotes.get(currNote).isCompleted()) {
                 currNote++;
                 return score;
             }
@@ -57,12 +65,18 @@ public class Lane {
         return Accuracy.NOT_SCORED;
     }
 
+    public void addNote(Note givenNote) {
+        this.laneNotes.add(givenNote);
+    }
+
     // Adapted from Project 1's solution's draw() in Lane class
-    public void draw() {
+    public void laneDraw() {
         laneImage.draw(centreX, centreY);
 
         for(int i = currNote; i < laneNotes.size(); i++) {
             laneNotes.get(i).noteDraw();
+            System.out.println("index note:" + i + " noteType:" + laneNotes.get(i).getStartX()
+                    + " noteLane: " + laneNotes.get(i).getNoteLane());
         }
     }
 

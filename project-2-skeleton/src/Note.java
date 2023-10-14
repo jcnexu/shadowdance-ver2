@@ -16,6 +16,7 @@ public class Note {
         noteImage = new Image("res/note" + dir + ".png");
         this.startX = startX;
         this.appearanceFrame = appearanceFrame;
+        this.noteLane = dir;
     }
 
     public int getStartX() {
@@ -27,6 +28,9 @@ public class Note {
 
     public void setStartY(int n) {
         this.startY = n;
+    }
+    public String getNoteLane() {
+        return this.noteLane;
     }
 
     public boolean isActive() {
