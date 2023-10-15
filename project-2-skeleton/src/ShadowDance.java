@@ -19,6 +19,8 @@ public class ShadowDance extends AbstractGame  {
     private final static String CLEAR_MESSAGE = "CLEAR!";
     private final static String TRY_AGAIN_MESSAGE = "TRY AGAIN";
     private final static String END_INSTRUCTIONS = "PRESS SPACE TO RETURN TO LEVEL SELECTION";
+    private final static int END_SCREEN_Y = 300;
+    private final static int END_INSTRUCTION_Y = 500;
     private final static int L1_TARGET = 150;
     private final static int L2_TARGET = 400;
     private final static int L3_TARGET = 350;
@@ -79,24 +81,22 @@ public class ShadowDance extends AbstractGame  {
             }
         } else if (finished) {
             // Target has been met!
-            started = false;
             if(targetMet) {
-                defaultFont.drawString(CLEAR_MESSAGE, (WINDOW_WIDTH/2 - defaultFont.getWidth(CLEAR_MESSAGE)),
-                        300);
-                startFont.drawString(END_INSTRUCTIONS, (WINDOW_WIDTH/2 - defaultFont.getWidth(CLEAR_MESSAGE)),
-                        500);
+                defaultFont.drawString(CLEAR_MESSAGE, (WINDOW_WIDTH/2 - defaultFont.getWidth(CLEAR_MESSAGE)/2),
+                        END_SCREEN_Y);
+                startFont.drawString(END_INSTRUCTIONS, (WINDOW_WIDTH/2 - startFont.getWidth(END_INSTRUCTIONS)/2),
+                        END_INSTRUCTION_Y);
             }
             if(!targetMet) {
-                defaultFont.drawString(TRY_AGAIN_MESSAGE, (WINDOW_WIDTH/2 - defaultFont.getWidth(CLEAR_MESSAGE)),
-                        300);
-                startFont.drawString(END_INSTRUCTIONS, (WINDOW_WIDTH/2 - defaultFont.getWidth(CLEAR_MESSAGE)),
-                        500);
+                defaultFont.drawString(TRY_AGAIN_MESSAGE, (WINDOW_WIDTH/2 - defaultFont.getWidth(TRY_AGAIN_MESSAGE)/2),
+                        END_SCREEN_Y);
+                startFont.drawString(END_INSTRUCTIONS, (WINDOW_WIDTH/2 - startFont.getWidth(END_INSTRUCTIONS)/2),
+                        END_INSTRUCTION_Y);
             }
-
-            // Will probably need to fix this bit up -> not sure where it goes for now
 
             if(input.wasPressed(Keys.SPACE)) {
                 started = true;
+                finished = false;
             }
 
         } else {
@@ -116,20 +116,20 @@ public class ShadowDance extends AbstractGame  {
                 currFrame++;
                 level2.update(input, accuracy);
 
-                /* finished = level2.getLevelFinished();
+                finished = level2.getLevelFinished();
                 if(finished) {
                     targetMet = checkTargetMet(level2, L2_TARGET);
-                }*/
+                }
             }
             if(pressedKeyNum.equals("3")) {
                 // Level 3 has been chosen
                 currFrame++;
                 level3.update(input, accuracy);
 
-                /* finished = level3.getLevelFinished();
+                finished = level3.getLevelFinished();
                 if(finished) {
                     targetMet = checkTargetMet(level3, L3_TARGET);
-                } */
+                }
             }
         }
 

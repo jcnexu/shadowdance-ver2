@@ -28,9 +28,6 @@ public class Note {
     public void setStartY(int n) {
         this.startY = n;
     }
-    public String getNoteLane() {
-        return this.noteLane;
-    }
 
     public boolean isActive() {
         return active;
@@ -62,14 +59,6 @@ public class Note {
 
     public int checkScore(Input input, Accuracy accuracy, int targetHeight, Keys relevantKey) {
         if (isActive()) {
-            // evaluate accuracy of the key press
-            int score = accuracy.evaluateScore(startY, targetHeight, input.wasPressed(relevantKey));
-
-            if (score != Accuracy.NOT_SCORED) {
-                deactivate();
-                return score;
-            }
-
         }
 
         return 0;

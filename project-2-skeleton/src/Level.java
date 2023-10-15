@@ -53,16 +53,21 @@ public class Level {
                     Lane currLane = new Lane(laneType, laneXCoord);
                     lanesArray.add(currLane);
                 }
-                // Otherwise, for the notes
+                if(fields[0].equalsIgnoreCase("Special")) {
+                    int noteFrameNumber = Integer.parseInt(fields[2]);
+                    createSpecialNote(fields[0], fields[1], noteFrameNumber, lanesArray);
+                }
+
+                // Otherwise, for the NORMAL  notes
                 int noteFrameNumber = Integer.parseInt(fields[2]);
-                createNote(fields[0], fields[1], noteFrameNumber, lanesArray);
+                createNormalNote(fields[0], fields[1], noteFrameNumber, lanesArray);
             }
         } catch(IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void createNote(String laneType, String noteType, int frameNumber, ArrayList<Lane> lanesArray) {
+    private void createNormalNote(String laneType, String noteType, int frameNumber, ArrayList<Lane> lanesArray) {
         int startX;
         Note currNote;
         if(noteType.equalsIgnoreCase("Normal")) {
@@ -76,12 +81,25 @@ public class Level {
            }
         } else if(noteType.equalsIgnoreCase("Hold")) {
             for(int i = 0; i < lanesArray.size(); i++) {
-                if(lanesArray.get(i).getLaneType().equals(laneType)) {
+                if(lanesArray.get(i).getLaneType().equalsIgnoreCase(laneType)) {
                     startX = lanesArray.get(i).getLaneX();
                     currNote = new HoldNote(laneType, startX, frameNumber);
                     lanesArray.get(i).addNote(currNote);
                     break;
                 }
+            }
+        }
+    }
+
+    private void createSpecialNote(String dir, String specialEffect, int frameNumber, ArrayList<Lane> lanesArray) {
+        int startX;
+        Note currNote;
+        for(int i = 0; i < lanesArray.size(); i++) {
+            if(lanesArray.get(i).getLaneType().equalsIgnoreCase("Special")) {
+                startX = lanesArray.get(i).getLaneX();
+                currNote = new SpecialNote(dir, specialEffect, startX, frameNumber);
+                lanesArray.get(i).addNote(currNote);
+                break;
             }
         }
     }
