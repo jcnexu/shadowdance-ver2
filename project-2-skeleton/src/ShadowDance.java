@@ -4,6 +4,8 @@ import bagel.*;
  * Please enter your name below
  * @author Jane Xu;
  */
+/** The class that runs everything in the game ShadowDance.
+ */
 public class ShadowDance extends AbstractGame  {
     private final static int WINDOW_WIDTH = 1024;
     private final static int WINDOW_HEIGHT = 768;
@@ -34,6 +36,10 @@ public class ShadowDance extends AbstractGame  {
     private Level level1 = new Level(1);
     private Level level2 = new Level(2);
     private Level level3 = new Level(3);
+    private Guardian guardian = new Guardian();
+
+    /** Constructor that creates a ShadowDance.
+     */
     public ShadowDance(){
         super(WINDOW_WIDTH, WINDOW_HEIGHT, GAME_TITLE);
     }
@@ -49,6 +55,8 @@ public class ShadowDance extends AbstractGame  {
     /**
      * Performs a state update.
      * Allows the game to exit when the escape key is pressed.
+     * Allows the player/user to choose which level of ShadowDance they want to play.
+     * @param input The input from the user/player.
      */
     @Override
     protected void update(Input input) {
@@ -125,6 +133,7 @@ public class ShadowDance extends AbstractGame  {
                 // Level 3 has been chosen
                 currFrame++;
                 level3.update(input, accuracy);
+                guardian.guardianDraw();
 
                 finished = level3.getLevelFinished();
                 if(finished) {
@@ -135,10 +144,18 @@ public class ShadowDance extends AbstractGame  {
 
     }
 
+    /** Getter that returns the current frame number of ShadowDance.
+     * @return currFrame.
+     */
     public static int getCurrFrame() {
         return currFrame;
     }
 
+    /** Checks if the target score of a level has been met.
+     * @param level The Level that is being checked
+     * @param targetScore The target score needed to clear the level
+     * @return boolean The state/if the level has been cleared.
+     */
     public boolean checkTargetMet(Level level, int targetScore) {
         // Score has met/exceeded level target score
         if(level.getLevelScore() >= targetScore) {

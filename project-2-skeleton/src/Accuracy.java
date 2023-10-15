@@ -17,6 +17,7 @@ public class Accuracy {
     private static final Font ACCURACY_FONT = new Font("res/FSO8BITR.TTF", 40);
     private static final int RENDER_FRAMES = 30;
     public static final int ENEMY_RANGE = 104;
+    private static final int SPECIAL_RANGE = 50;
     private static final String SPEED_UP = "Speed Up";
     private static final String DOUBLE_SCORE = "Double Score";
     private static final String SLOW_DOWN = "Slow Down";

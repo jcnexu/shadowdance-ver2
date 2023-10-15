@@ -21,4 +21,15 @@ public class SpecialNote extends Note {
         }
     }
 
+    public String getSpecialEffect() {
+        return this.specialEffect;
+    }
+
+    public void noteEffect() {
+       if(this.getSpecialEffect().equalsIgnoreCase("DoubleScore")) {
+           // Implement effect
+       }
+
+    }
+
 }
