@@ -45,6 +45,18 @@ public class Level {
         return this.levelFinished;
     }
 
+    /** Resets a level by setting levelFinished to given boolean and resetting
+     * currNote of a Lane to given int value.
+     * @param state The boolean value signifying if a Level is finished
+     * @param num The current Note number that currNote of Lane should be reset to.
+     */
+    public void resetLevel(boolean state, int num) {
+        this.levelFinished = state;
+        for(int i = 0; i < lanesArray.size(); i++) {
+            lanesArray.get(i).setCurrNote(num);
+        }
+    }
+
     /** Reads in a relevant Level world file to create the needed Lanes and Notes
      * @param levelNum The level number of the Level to be created.
      */

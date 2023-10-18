@@ -43,6 +43,7 @@ public class Lane {
                 break;
             case "Special":
                 relevantKey = Keys.SPACE;
+                break;
         }
     }
 
@@ -65,6 +66,13 @@ public class Lane {
      */
     public int getLaneX() {
         return this.centreX;
+    }
+
+    /** Setter to change currNote value to given integer value.
+     * @param num The new value to set currNote to.
+     */
+    public void setCurrNote(int num) {
+        this.currNote = num;
     }
 
 

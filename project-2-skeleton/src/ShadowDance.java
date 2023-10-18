@@ -1,4 +1,5 @@
 import bagel.*;
+import java.util.ArrayList;
 /**
  * Skeleton Code for SWEN20003 Project 2, Semester 2, 2023
  * Please enter your name below
@@ -37,6 +38,7 @@ public class ShadowDance extends AbstractGame  {
     private Level level2 = new Level(2);
     private Level level3 = new Level(3);
     private Guardian guardian = new Guardian();
+    private Enemy enemy = new Enemy();
 
     /** Constructor that creates a ShadowDance.
      */
@@ -105,6 +107,10 @@ public class ShadowDance extends AbstractGame  {
             if(input.wasPressed(Keys.SPACE)) {
                 started = true;
                 finished = false;
+                // Reset levels
+                level1.resetLevel(false, 0);
+                level2.resetLevel(false, 0);
+                level3.resetLevel(false, 0);
             }
 
         } else {
@@ -134,6 +140,10 @@ public class ShadowDance extends AbstractGame  {
                 currFrame++;
                 level3.update(input, accuracy);
                 guardian.guardianDraw();
+
+                ArrayList<Lane> lanes = level3.getLanesArray();
+
+                enemy.update(lanes);
 
                 finished = level3.getLevelFinished();
                 if(finished) {

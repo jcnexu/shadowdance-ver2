@@ -6,11 +6,11 @@ public class Projectile {
     private int rotation = 0;
     private int projectileX;
     private int projectileY;
-    private int destX;
-    private int destY;
+    private double destX;
+    private double destY;
     private boolean isShooting = false;
 
-    public Projectile(int startX, int startY, int destX, int destY) {
+    public Projectile(int startX, int startY, double destX, double destY) {
         this.projectileX = startX;
         this.projectileY = startY;
         this.destX = destX;
