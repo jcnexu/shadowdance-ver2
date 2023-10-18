@@ -120,7 +120,7 @@ public class Enemy {
      * and outside its bounds, will make it move the opposite way.
      * Also updates whether an Enemy is active or not.
      * @param lanes The lanes ArrayList to be iterated through to see if the Enemy
-     *              can steal a Note. 
+     *              can steal a Note.
      */
     public void update(ArrayList<Lane> lanes) {
         int enemyX = this.getStartX();
