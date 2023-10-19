@@ -60,6 +60,7 @@ public class ShadowDance extends AbstractGame  {
      * Allows the player/user to choose which level of ShadowDance they want to play.
      * @param input The input from the user/player.
      */
+    // Adapted from Project 1's solution's update() in ShadowDance
     @Override
     protected void update(Input input) {
 

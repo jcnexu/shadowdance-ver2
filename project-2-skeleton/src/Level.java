@@ -157,6 +157,7 @@ public class Level {
         }
     }
 
+    // Adapted from Project 1's solution
     private boolean checkFinished() {
         for (int i = 0; i < lanesArray.size(); i++) {
             // Check if every Lane in lanesArray is finished

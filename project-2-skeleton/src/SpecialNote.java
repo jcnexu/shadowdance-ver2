@@ -10,6 +10,7 @@ public class SpecialNote extends Note {
     private static final int SLOW_DOWN = -1;
     // How many frames DoubleScore note's effect will be rendered for
     private static final int DOUBLESCORE_DURATION = 480;
+    private static final int TARGET_HEIGHT = 657;
 
 
     /** Constructor that creates a new SpecialNote.
@@ -70,6 +71,11 @@ public class SpecialNote extends Note {
                     input.wasPressed(relevantKey));
 
             if(score != Accuracy.SPECIAL_MISSED) {
+                deactivate();
+                return score;
+            }
+            // Deactivate SpecialNote once it passes the stationary image and hasn't been scored
+            if(score == Accuracy.SPECIAL_MISSED && this.getStartY() > TARGET_HEIGHT + 200) {
                 deactivate();
                 return score;
             }
