@@ -57,6 +57,13 @@ public class Enemy {
         return this.startY;
     }
 
+    /** Getter that returns the active state of Enemy object.
+     * @return active;
+     */
+    public boolean getActive() {
+        return this.active;
+    }
+
     /** Setter that sets new value for startX
      * @param n New value to set startX to.
      */

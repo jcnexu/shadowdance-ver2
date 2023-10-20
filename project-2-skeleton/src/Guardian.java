@@ -41,6 +41,7 @@ public class Guardian {
             Projectile arrow = new Projectile(guardianX, guardianY, destinationX, destinationY);
             arrow.setIsShooting(true);
             arrows.add(arrow);
+            arrow.update();
 
         }
     }
@@ -51,5 +52,21 @@ public class Guardian {
     public Point findNearestEnemy() {
         Point coord = new Point(0,0);
         return coord;
+    }
+
+    /** Finds the (nearest) Enemy in the Level and returns its coodinates.
+     * Returns a coordinate with negative values if there is no Enemy.
+     * @return the Point of the destination/place of the Enemy object.
+     */
+    public Point foundEnemy(ShadowDance game) {
+
+        if(game.getEnemy().getActive()) {
+            Point dest = new Point(game.getEnemy().getStartX(), game.getEnemy().getStartY());
+            return dest;
+        }
+        else {
+            Point notFound = new Point(-1, -1);
+            return notFound;
+        }
     }
 }

@@ -7,6 +7,7 @@ import java.lang.Math;
  */
 public class Projectile {
     private final int PROJECTILE_SPEED = 6;
+    private final int PROJECTILE_RANGE = 62;
     private final Image projectileImage = new Image("res/arrow.PNG");
     private double rotation = 0;
     private Vector2 start;
@@ -60,9 +61,8 @@ public class Projectile {
         double adjacent = dest.x - start.x;
         double opposite = dest.y - start.y;
         double oppAdj = opposite / adjacent;
-        double angle = Math.tanh(oppAdj);
 
-        return angle;
+        return Math.tanh(oppAdj);
     }
 
     /** Draws the Projectile if it has been created/is being shot by the player.
@@ -74,6 +74,24 @@ public class Projectile {
             DrawOptions rotating = new DrawOptions();
 
             projectileImage.draw(x, y, rotating.setRotation(rotation));
+        }
+    }
+
+    /** Moves the Projectile towards its destination.
+     * Once Projectile reaches within the PROJECTILE_RANGE of its target,
+     * it stops being drawn and kills the Enemy it's aimed at too.
+     */
+    public void update() {
+        projectileDraw();
+
+        /* Increase x and y-coordinates of Projectile by
+        PROJECTILE_SPEED to move it
+        */
+
+        if((this.getDest().x - this.getStart().x >= PROJECTILE_RANGE)
+        && (this.getDest().y - this.getStart().y >= PROJECTILE_RANGE)) {
+            this.setIsShooting(false);
+            /* Deactivate Enemy as well */
         }
     }
 

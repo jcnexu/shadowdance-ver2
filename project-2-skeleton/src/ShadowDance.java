@@ -176,5 +176,11 @@ public class ShadowDance extends AbstractGame  {
         return false;
     }
 
+    /** Getter to return the Enemy object created in ShadowDance.
+     * @return enemy.
+     */
+    public Enemy getEnemy() {
+        return this.enemy;
+    }
 
 }
